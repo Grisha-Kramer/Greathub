@@ -1,0 +1,23 @@
+{
+  "name": "greathub",
+  "version": "1.0.0",
+  "description": "auction app using database",
+  "main": "great-bay.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biffbifferson86/Greathub.git"
+  },
+  "author": "Grisha Kramer, Ben Ferriman, Gina Lucy, Pam Deininger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/biffbifferson86/Greathub/issues"
+  },
+  "homepage": "https://github.com/biffbifferson86/Greathub#readme",
+  "dependencies": {
+    "inquirer": "^7.0.4",
+    "mysql": "^2.18.1"
+  }
+}
