@@ -37,6 +37,59 @@ function postItem() {
   });
 }
 
+function bidItem() {
+
+  let query = connection.query(
+    "SELECT * FROM auctions", function(err, res) {
+      if(err) throw err;
+      console.log(res);
+      inquirer.prompt([
+        {
+          type: "input",
+          name: "id",
+          message: "Item id:"
+        },
+        {
+          type: "input",
+          name: "bid",
+          message: "Your bid:"
+        }
+      ])
+      .then( value => {
+        let index = 0;
+        for(let i = 0; i < res.length; i++) {
+          if(parseInt(res[i].id) === parseInt(value.id)) {
+            index = i;
+          }
+        }
+        if(value.bid > res[index].highest_bid && value.bid >= res[index].starting_bid){
+          console.log("You are the new highest bidder!");
+          let query = connection.query(
+            "UPDATE auctions SET ? WHERE ?",
+            [
+              {
+                highest_bid: value.bid
+              },
+              {
+                id: value.id
+              }
+            ],
+            function(err, res) {
+              if(err) throw err;
+              console.log("High bid updated successfully");
+              start();
+            }
+          );
+        }
+        else {
+          console.log("Your bid was not high enough");
+          start();
+        }
+      });
+  });
+
+}
+
 
 const connection = mysql.createConnection( {
   host: "localhost",
@@ -77,7 +130,7 @@ function start() {
       postItem();
     }
     else if(choice === "Bid on an Item") {
-      start();
+      bidItem();
     }
     else {  //quit
       console.log("Goodbye!");
