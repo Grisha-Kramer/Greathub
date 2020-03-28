@@ -101,7 +101,7 @@ const connection = mysql.createConnection( {
   user: "root",
 
   // Your password
-  password: "h#191712sPs)7",
+  password: "",
   database: "greatbay_db"
 });
 
